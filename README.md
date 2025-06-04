@@ -61,3 +61,105 @@ Your work will be automatically submitted when you push to your GitHub Classroom
 - [Express.js Documentation](https://expressjs.com/)
 - [RESTful API Design Best Practices](https://restfulapi.net/)
 - [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+
+
+My API documentation
+ Product API Documentation
+Base URL: http://localhost:3000/api
+
+🛑 Authentication
+Requires x-api-key: your-secret-key in headers for protected routes (POST/PUT/DELETE).
+
+📦 Products Endpoints
+1. Get All Products
+GET /products
+Query Params:
+
+category (optional): Filter by category (e.g., electronics)
+
+page (optional): Pagination page number
+
+limit (optional): Items per page (default: 10)
+
+Response:
+
+json
+{
+  "total": 3,
+  "page": 1,
+  "limit": 10,
+  "data": [
+    {
+      "id": "1",
+      "name": "Laptop",
+      "description": "High-performance laptop",
+      "price": 1200,
+      "category": "electronics",
+      "inStock": true
+    }
+  ]
+}
+2. Get Single Product
+GET /products/:id
+Response (Success):
+
+json
+{
+  "id": "1",
+  "name": "Laptop",
+  ...
+}
+Response (Error):
+
+json
+{ "error": "Product not found" }
+3. Create Product
+POST /products
+Headers:
+
+Content-Type: application/json
+
+x-api-key: your-secret-key
+
+Request Body:
+
+json
+{
+  "name": "Smartphone",
+  "description": "Latest model",
+  "price": 800,
+  "category": "electronics",
+  "inStock": true
+}
+Response (Success):
+
+json
+{
+  "id": "4",
+  "name": "Smartphone",
+  ...
+}
+4. Update Product
+PUT /products/:id
+Headers: Same as POST
+Request Body: Partial updates allowed (e.g., just { "price": 750 })
+Response: Updated product JSON.
+
+5. Delete Product
+DELETE /products/:id
+Response: HTTP 204 (No Content) on success.
+
+⚙️ Error Responses
+400 Bad Request: Missing/invalid fields
+
+401 Unauthorized: Invalid API key
+
+404 Not Found: Product ID not found
+
+500 Server Error: Internal server error
+
+📌 Example Requests:
+
+bash
+curl -X GET http://localhost:3000/api/products
+curl -X POST -H "x-api-key: your-secret-key" -d '{"name":"Keyboard"}' http://localhost:3000/api/products
