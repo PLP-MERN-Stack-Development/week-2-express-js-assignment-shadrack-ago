@@ -163,3 +163,4 @@ Response: HTTP 204 (No Content) on success.
 bash
 curl -X GET http://localhost:3000/api/products
 curl -X POST -H "x-api-key: your-secret-key" -d '{"name":"Keyboard"}' http://localhost:3000/api/products
+For post request you must use the auth keys
